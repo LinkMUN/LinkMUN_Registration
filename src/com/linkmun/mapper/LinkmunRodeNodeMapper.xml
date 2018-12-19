@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linkmun.mapper.LinkmunRodeNodeMapper">
+  <resultMap id="BaseResultMap" type="com.linkmun.model.LinkmunRodeNode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="linkmun_role_livel" jdbcType="INTEGER" property="linkmunRoleLivel" />
+    <result column="linkmun_node_id" jdbcType="INTEGER" property="linkmunNodeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, linkmun_role_livel, linkmun_node_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from link.linkmun_rode_node
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByRode" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from link.linkmun_rode_node
+    where linkmun_role_livel =#{linkmunRoleLivel,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from link.linkmun_rode_node
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.linkmun.model.LinkmunRodeNode">
+    insert into link.linkmun_rode_node (id, linkmun_role_livel, linkmun_node_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{linkmunRoleLivel,jdbcType=INTEGER}, #{linkmunNodeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.linkmun.model.LinkmunRodeNode">
+    insert into link.linkmun_rode_node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="linkmunRoleLivel != null">
+        linkmun_role_livel,
+      </if>
+      <if test="linkmunNodeId != null">
+        linkmun_node_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="linkmunRoleLivel != null">
+        #{linkmunRoleLivel,jdbcType=INTEGER},
+      </if>
+      <if test="linkmunNodeId != null">
+        #{linkmunNodeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkmun.model.LinkmunRodeNode">
+    update link.linkmun_rode_node
+    <set>
+      <if test="linkmunRoleLivel != null">
+        linkmun_role_livel = #{linkmunRoleLivel,jdbcType=INTEGER},
+      </if>
+      <if test="linkmunNodeId != null">
+        linkmun_node_id = #{linkmunNodeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.linkmun.model.LinkmunRodeNode">
+    update link.linkmun_rode_node
+    set linkmun_role_livel = #{linkmunRoleLivel,jdbcType=INTEGER},
+      linkmun_node_id = #{linkmunNodeId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
